@@ -1,34 +1,90 @@
-# 🍔 Food Delivery Database Design
+# 🍽️ Food Delivery Platform – Relational Database Schema
 
-This repository contains the **Entity-Relationship Diagram (ERD)** and the corresponding **SQL schema** for a food delivery platform database.
+This repository contains the relational database schema for a food delivery platform. The schema is designed to efficiently manage users, restaurants, menus, orders, and reviews while ensuring data integrity and scalability.
 
-## 📦 Files
+## 📦 Project Overview
 
-- `erd.mmd`: ERD in Mermaid.js format (view with Mermaid Live Editor)
-- `ecommerce.sql`: SQL file to create all necessary tables
+The goal of this project is to demonstrate strong database design principles through:
 
-## 🧩 ERD Overview
+- A clear Entity-Relationship Diagram (ERD)
+- A normalized, production-ready PostgreSQL schema
+- Proper use of constraints, triggers, and indexing
 
-The database includes the following core entities:
-- `user` — Customers, restaurant owners, and admins
-- `restaurant` — Listings of restaurants
-- `menu_item` — Menu items offered by restaurants
-- `menu_item_image` — Images for menu items
-- `order` — Orders placed by users
-- `order_item` — Items within each order
-
-## 🔄 Relationships
-
-- A **user** can place many **orders**
-- A **restaurant** has many **menu_items**
-- A **menu_item** can have many **images**
-- An **order** contains many **order_items**
-- Each **order_item** references one **menu_item**
-
-## 📊 ERD Preview
-
-Paste the content of `erd.mmd` into [Mermaid Live Editor](https://mermaid.live) to view the diagram.
+> This schema is part of a collaborative challenge focused on mastering database architecture for a full-featured e-commerce or service-based application.
 
 ---
 
-Built with ❤️ for a database design challenge.
+## 📁 Repository Structure
+
+| File              | Description                                           |
+|-------------------|-------------------------------------------------------|
+| `ecommerce.sql`   | SQL file with full schema creation, triggers, and indexes |
+| `erd.png`         | ERD image illustrating entities and relationships     |
+| `README.md`       | Project documentation and implementation overview     |
+
+---
+
+## 🧱 Database Entities
+
+### 👤 Users
+Stores customer, restaurant owner, and admin data.
+
+- Includes role-based access via the `user_role` ENUM.
+- Validates phone numbers and ensures unique emails.
+
+### 🍽️ Restaurants
+Details about registered restaurants and their cuisine type.
+
+- Linked to a `cuisine` category.
+- Supports automatic `updated_at` timestamping.
+
+### 🍛 Menu Items
+Represents dishes offered by each restaurant.
+
+- Tracks availability and pricing.
+- Includes image support via a related table.
+
+### 📸 Menu Item Images
+Stores image URLs for menu items.
+
+### 🧾 Orders
+Represents a customer order with delivery details and order status.
+
+- Tracks status using the `order_status` ENUM.
+- Linked to both the customer and the restaurant.
+
+### 📦 Order Items
+Detailed list of menu items in a specific order, including quantity and price.
+
+### ⭐ Reviews
+User-generated reviews of restaurants with rating and comments.
+
+### 🍴 Cuisine
+Defines types of cuisine (e.g., Italian, Chinese).
+
+---
+
+## ✅ Key Features
+
+- **ENUM Types**  
+  - `user_role`: `customer`, `restaurant_owner`, `admin`  
+  - `order_status`: `pending`, `confirmed`, `preparing`, `in_transit`, `delivered`, `cancelled`
+
+- **Constraints & Validations**
+  - Phone number format validation
+  - Rating and pricing checks
+  - Unique constraints on emails and cuisine names
+
+- **Referential Integrity**
+  - Foreign keys with `ON DELETE CASCADE`
+  - Logical relationship mapping across entities
+
+- **Timestamps & Triggers**
+  - Auto-updating `updated_at` on record modification via triggers
+
+- **Indexes**
+  - Speeds up lookups by email, order status, and cuisine
+
+---
+
+**Built with ❤️ for a database design challenge.**
