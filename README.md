@@ -19,7 +19,7 @@ The goal of this project is to demonstrate strong database design principles thr
 | File              | Description                                           |
 |-------------------|-------------------------------------------------------|
 | `ecommerce.sql`   | SQL file with full schema creation, triggers, and indexes |
-| `erd.png`         | ERD image illustrating entities and relationships     |
+| `Final ERD.png`         | ERD image illustrating entities and relationships     |
 | `README.md`       | Project documentation and implementation overview     |
 
 ---
